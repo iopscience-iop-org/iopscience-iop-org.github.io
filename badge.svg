@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20">
+  <linearGradient id="a" x2="0" y2="100%">
+    <stop offset="0" stop-color="#fff"/>
+    <stop offset="1" stop-color="#eee"/>
+  </linearGradient>
+  
+  <!-- Left Box -->
+  <rect width="66" height="18" x="1" y="1" fill="url(#a)" stroke="#999" rx="0"/>
+  
+  <!-- Dimensions logo isolated -->
+  <svg x="2" y="2" width="14" height="14" viewBox="-150 -150 900 900">
+    <path fill="#006EB6" d="M0 0l300 300v-424.4C182.9-124.4 76.8-76.9 0 0z"/>
+    <path fill="#28348A" d="M300-124.4V300L600 0c-76.8-76.9-182.9-124.4-300-124.4z"/>
+    <path fill="#E20613" d="M600 600c76.8-76.8 124.3-182.9 124.3-300H300l300 300z"/>
+    <path fill="#DA0078" d="M300 300h424.4c0-117.1-47.5-223.2-124.3-300L300 300z"/>
+    <path fill="#5BC4F1" d="M-124.4 300H300L0 0c-76.9 76.8-124.4 182.9-124.4 300z"/>
+    <path fill="#A1C517" d="M0 600l300-300h-424.4c0 117.1 47.5 223.2 124.4 300z"/>
+    <path fill="#F08800" d="M300 724.4c117.1 0 223.2-47.5 300-124.3L300 300v424.4z"/>
+    <path fill="#FFCB00" d="M300 724.4V300L0 600c76.8 76.9 182.9 124.4 300 124.4z"/>
+  </svg>
+  
+  <!-- Text "Citations" -->
+  <text font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#111" x="18" y="14">Citations</text>
+  
+  <!-- Right Speech Bubble -->
+  <path fill="#fff" stroke="#999" stroke-width="0.8" d="M73 2 v6 l-4 2 l4 2 v6 h35 v-16 z" />
+  <text font-family="Arial,sans-serif" font-size="11" fill="#333" x="77" y="14">5.6k</text>
+</svg>
