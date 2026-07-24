@@ -50,12 +50,20 @@ def fetch_and_update_homepage(user_li):
         for attr in ['href', 'src', 'data-src', 'data-srcset', 'action']:
             if tag.has_attr(attr):
                 val = tag[attr]
-                # Strip Wayback Machine wrapper
-                val = wayback_pattern.sub('', val)
-                # Convert relative to absolute
                 if val.startswith('/'):
-                    val = BASE_URL + val
-                tag[attr] = val
+                    tag[attr] = BASE_URL + val
+                elif wayback_pattern.match(val):
+                    tag[attr] = wayback_pattern.sub('', val)
+                    
+    # Prevent UI breakage by using local assets and Wayback images
+    html_content = str(soup)
+    html_content = re.sub(r'https://static\.iopscience\.com/4\.3[23]\.0/css/criticalStyles\.min\.css', '/assets/css/criticalStyles.min.css', html_content)
+    html_content = re.sub(r'https://static\.iopscience\.com/4\.3[23]\.0/css/mainStyles\.min\.css', '/assets/css/mainStyles.min.css', html_content)
+    html_content = re.sub(r'https://static\.iopscience\.com/4\.3[23]\.0/js', '/assets/js', html_content)
+    html_content = re.sub(r'https://static\.iopscience\.com/4\.3[23]\.0/img', 'https://web.archive.org/web/20260718224432if_/https://static.iopscience.com/4.33.0/img', html_content)
+    html_content = html_content.replace('media="print" onload="this.media=\'all\'"', 'media="all"')
+    
+    soup = BeautifulSoup(html_content, 'html.parser')
                     
     # Find Most read section
     h2 = soup.find(lambda tag: tag.name == 'h2' and tag.get_text() and 'Most read' in tag.get_text())
