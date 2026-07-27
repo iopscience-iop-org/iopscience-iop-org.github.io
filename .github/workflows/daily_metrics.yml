@@ -6,6 +6,9 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch: # Allow manual triggering for testing
 
+permissions:
+  contents: write
+
 jobs:
   update-metrics:
     runs-on: ubuntu-latest
@@ -19,72 +22,7 @@ jobs:
           python-version: '3.x'
 
       - name: Run daily metric updater
-        run: |
-          # Copy the script to the repo root if it's not already there,
-          # or run it from its location.
-          # We'll run it directly from the parent directory if possible,
-          # or assume it's checked into the repo.
-          if [ -f "../daily_metric_updater.py" ]; then
-             python3 ../daily_metric_updater.py
-          elif [ -f "daily_metric_updater.py" ]; then
-             python3 daily_metric_updater.py
-          else
-             # For safety, let's just recreate the simple updater script here
-             cat << 'EOF' > run_update.py
-import os, re, json, random
-BASE_DIR = '.'
-STATE_FILE = os.path.join(BASE_DIR, '.metrics.json')
-def format_indian_number(num):
-    s = str(num); res = s[-3:]; s = s[:-3]
-    while len(s) > 2: res = s[-2:] + ',' + res; s = s[:-2]
-    if s: res = s + ',' + res
-    return res
-def format_k(num): return f"{num / 1000:.1f}k"
-def main():
-    if os.path.exists(STATE_FILE):
-        with open(STATE_FILE, 'r') as f: state = json.load(f)
-    else: state = {"downloads": 516083, "citations": 5639}
-    
-    old_downloads = state['downloads']
-    old_citations = state['citations']
-    
-    new_downloads = old_downloads + random.randint(1000, 2000)
-    new_citations = old_citations + random.randint(1000, 2000)
-    
-    state['downloads'] = new_downloads
-    state['citations'] = new_citations
-    
-    with open(STATE_FILE, 'w') as f: json.dump(state, f, indent=4)
-        
-    old_d_str = format_indian_number(old_downloads)
-    new_d_str = format_indian_number(new_downloads)
-    old_c_str = format_k(old_citations)
-    new_c_str = format_k(new_citations)
-    
-    art = os.path.join(BASE_DIR, 'article.html')
-    if os.path.exists(art):
-        with open(art, 'r') as f: c = f.read()
-        c = c.replace(old_d_str, new_d_str)
-        c = c.replace(old_c_str, new_c_str)
-        with open(art, 'w') as f: f.write(c)
-        
-    bdg = os.path.join(BASE_DIR, 'badge.svg')
-    if os.path.exists(bdg):
-        with open(bdg, 'r') as f: c = f.read()
-        c = c.replace(old_c_str, new_c_str)
-        with open(bdg, 'w') as f: f.write(c)
-        
-    dim = os.path.join(BASE_DIR, 'badge_extracted/badge.dimensions.ai/details/doi/10.3847/1538-4357/ae63bc.html')
-    if os.path.exists(dim):
-        with open(dim, 'r') as f: c = f.read()
-        c = c.replace(str(old_citations), str(new_citations))
-        with open(dim, 'w') as f: f.write(c)
-
-if __name__ == '__main__': main()
-EOF
-             python3 run_update.py
-             rm run_update.py
-          fi
+        run: python3 daily_metric_updater.py
 
       - name: Run Integrity Tests
         run: |
