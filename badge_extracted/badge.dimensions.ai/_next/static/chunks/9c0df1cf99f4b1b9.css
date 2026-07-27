@@ -1,0 +1,2146 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    border: 0;
+    margin: 0;
+    padding: 0
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block
+}
+
+body {
+    line-height: 1
+}
+
+ol,
+ul {
+    list-style: none
+}
+
+blockquote,
+q {
+    quotes: none
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+@font-face {
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/roboto-regular-webfont.woff)format("woff")
+}
+
+@font-face {
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700;
+    src: url(/fonts/roboto-bold-webfont.woff)format("woff")
+}
+
+@font-face {
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 100;
+    src: url(/fonts/roboto-light-webfont.woff)format("woff")
+}
+
+@font-face {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/fontawesome-webfont.woff)format("woff")
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    height: 100%
+}
+
+body {
+    color: #263238;
+    -webkit-text-size-adjust: none;
+    background: #eceff1;
+    min-height: 100%;
+    margin: 0;
+    font-family: roboto-webfont;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px
+}
+
+a {
+    color: #1565c0;
+    cursor: pointer;
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+a.external-link:after {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 7px;
+    font-size: 80%;
+    display: inline-block
+}
+
+strong {
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.details-page-wrapper {
+    position: absolute;
+    inset: 0
+}
+
+.badge-builder-page {
+    background: #fff
+}
+
+.DetailsPage {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100%;
+    display: flex
+}
+
+.DetailsPage .DetailsPage-content-wrapper {
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: stretch;
+    min-height: 100%;
+    margin: 0 50px;
+    display: flex
+}
+
+@media only screen and (min-width:0) and (max-width:860px) {
+    .DetailsPage .DetailsPage-content-wrapper {
+        margin: 0
+    }
+}
+
+.DetailsPage>.LoadingMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.obsolete-browser-warning {
+    text-align: center;
+    background-color: #fce18a;
+    padding: 12px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 100
+}
+
+.obsolete-browser-warning a {
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.Header-wrapper {
+    background: #263238;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0
+}
+
+.Header {
+    color: #eceff1;
+    width: 100%
+}
+
+.Header .Header-button {
+    color: #fff;
+    cursor: pointer;
+    background: #546e7a;
+    border-radius: 3px;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: inline-block
+}
+
+.Header .Header-button:hover {
+    color: #546e7a;
+    background: #fff
+}
+
+.Header-wrapper .rui-header-inner {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    margin: 0 20px;
+    display: flex;
+    overflow: hidden
+}
+
+@media only screen and (min-width:861px) {
+    .Header-wrapper .rui-header-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center
+    }
+    .Header {
+        width: auto
+    }
+}
+
+.Header .Header-button {
+    margin: 3px 6px;
+    padding: 3px 15.6px;
+    font-size: 13px;
+    line-height: 24px
+}
+
+.HeaderButtonBar-wrapper {
+    width: 100%
+}
+
+.HeaderButtonBar {
+    flex-grow: 1;
+    transition: transform .4s ease-in-out
+}
+
+.HeaderButtonBar.visibleSharing {
+    transform: translate(-132px)
+}
+
+.Footer {
+    color: #eceff1;
+    background: #263238;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    display: flex;
+    overflow: hidden
+}
+
+@media only screen and (min-width:861px) {
+    .Footer {
+        flex-direction: row;
+        justify-content: space-between
+    }
+}
+
+.Footer .footer-links-spacer {
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+.Footer a {
+    color: #eceff1;
+    text-decoration: underline
+}
+
+.Lightbox .Lightbox-overlay {
+    z-index: 2000;
+    background: #000000e6;
+    position: fixed;
+    inset: 0
+}
+
+.Lightbox .Lightbox-wrapper {
+    color: #546e7a;
+    z-index: 2001;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 80%;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    overflow: auto;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 30px #000
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-inner-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 12px 24px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-close {
+    z-index: 2002;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+    background-color: #263238;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    box-shadow: 0 0 5px #00000080
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-close:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 17px;
+    line-height: 14px;
+    display: inline-block
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content p,
+.Lightbox .Lightbox-wrapper .Lightbox-content ul,
+.Lightbox .Lightbox-wrapper .Lightbox-content blockquote,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre,
+.Lightbox .Lightbox-wrapper .Lightbox-content table,
+.Lightbox .Lightbox-wrapper .Lightbox-content .Preview {
+    margin-bottom: 24px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content blockquote {
+    background: #eceff1;
+    border-left: 10px solid #78909c;
+    padding: 12px 12px 12px 24px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content h1 {
+    border-bottom: 1px solid #cfd8dc;
+    margin-bottom: 24px;
+    font-family: roboto-webfont;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content h2 {
+    margin-bottom: 12px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content h3 {
+    border-bottom: 1px solid #cfd8dc;
+    margin-bottom: 24px;
+    font-family: roboto-webfont;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content h4 {
+    margin-bottom: 12px;
+    font-family: roboto-webfont;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content ul {
+    list-style-type: disc;
+    list-style-position: inside
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content p code,
+.Lightbox .Lightbox-wrapper .Lightbox-content blockquote code,
+.Lightbox .Lightbox-wrapper .Lightbox-content table code {
+    color: #eceff1;
+    background: #263238;
+    border: 1px solid #263238;
+    border-radius: 4px;
+    margin: 0 5px;
+    padding: 0 5px;
+    font-family: monospace;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1.2em;
+    display: inline-block
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs {
+    color: #eceff1;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #263238;
+    border: 1px solid #263238;
+    border-radius: 4px;
+    padding: 24px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 18px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs>code.wrap {
+    white-space: normal
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs {
+    color: #abb2bf;
+    background: #282c34;
+    padding: .5em;
+    display: block;
+    overflow-x: auto
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-comment,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-quote {
+    color: #5c6370;
+    font-style: italic
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-doctag,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-keyword,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-formula {
+    color: #c678dd
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-section,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-name,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-selector-tag,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-deletion,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-subst {
+    color: #e06c75
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-literal {
+    color: #56b6c2
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-string,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-regexp,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-addition,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-attribute,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-meta-string {
+    color: #98c379
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-built_in,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-class .hljs-title {
+    color: #e6c07b
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-attr,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-variable,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-template-variable,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-type,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-selector-class,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-selector-attr,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-selector-pseudo,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-number {
+    color: #d19a66
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-symbol,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-bullet,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-link,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-meta,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-selector-id,
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-title {
+    color: #61aeee
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-emphasis {
+    font-style: italic
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-strong {
+    font-weight: 700
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content pre.hljs .hljs-link {
+    text-decoration: underline
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content table {
+    width: 100%
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content table th,
+.Lightbox .Lightbox-wrapper .Lightbox-content table td {
+    padding: 6px
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content table th {
+    text-align: left;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content table tr {
+    border-bottom: 1px solid #cfd8dc
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content table tr:nth-child(odd) td {
+    background: #eceff1
+}
+
+.Lightbox .Lightbox-wrapper .Lightbox-content table .code {
+    white-space: nowrap;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 24px
+}
+
+.Lightbox .Lightbox-enter .Lightbox-overlay {
+    opacity: 0
+}
+
+.Lightbox .Lightbox-enter .Lightbox-wrapper {
+    opacity: 0;
+    transform: translate(-50%, -40%)
+}
+
+.Lightbox .Lightbox-enter.Lightbox-enter-active .Lightbox-overlay {
+    opacity: 1;
+    transition: opacity .5s ease-in-out
+}
+
+.Lightbox .Lightbox-enter.Lightbox-enter-active .Lightbox-wrapper {
+    opacity: 1;
+    transition: opacity .5s ease-in-out .25s, transform .5s ease-in-out .25s;
+    transform: translate(-50%, -50%)
+}
+
+.Lightbox .Lightbox-leave.Lightbox-leave-active .Lightbox-overlay {
+    opacity: 0;
+    transition: opacity .5s ease-in-out .25s
+}
+
+.Lightbox .Lightbox-leave.Lightbox-leave-active .Lightbox-wrapper {
+    opacity: 0;
+    transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+    transform: translate(-50%, -40%)
+}
+
+.Sharing {
+    position: relative
+}
+
+.Sharing.Sharing.show {
+    opacity: 1;
+    padding: 10px;
+    box-shadow: 0 1px 3px #00000080
+}
+
+.Sharing .share-networks {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    gap: 10px;
+    display: flex
+}
+
+.Sharing .network {
+    aspect-ratio: 1;
+    flex: 1 0 36px;
+    height: 36px;
+    padding: 10px;
+    display: block
+}
+
+.Sharing .network path {
+    fill: #fff
+}
+
+.Sharing .network.twitter {
+    background: #55acee
+}
+
+.Sharing .network.twitter:hover {
+    background: #2795e9
+}
+
+.Sharing .network.facebook {
+    background: #3b5998
+}
+
+.Sharing .network.facebook:hover {
+    background: #2d4373
+}
+
+.Sharing .network.email {
+    background: #777
+}
+
+.Sharing .network.email:hover {
+    background: #5e5e5e
+}
+
+.NoDataMessage {
+    text-align: center;
+    background-color: #fff;
+    align-items: center;
+    width: 50%;
+    min-width: 400px;
+    margin: 120px auto;
+    display: flex;
+    box-shadow: 0 0 20px #0000001a
+}
+
+.NoDataMessage .not-found-logo,
+.NoDataMessage .content {
+    float: left;
+    text-align: left;
+    padding: 24px;
+    font-family: roboto-webfont;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.NoDataMessage .not-found-logo {
+    background-image: url(/images/not-found-badge.svg);
+    background-repeat: no-repeat;
+    min-width: 250px;
+    height: 250px
+}
+
+.NoDataMessage .not-found-logo .error {
+    font-size: 50px;
+    line-height: 96px;
+    position: relative;
+    top: 30px;
+    left: 55px
+}
+
+.NoDataMessage .not-found-logo .description {
+    font-size: 18px;
+    line-height: 48px;
+    position: relative;
+    left: 50px
+}
+
+@keyframes animation-LoadingMessage-loading {
+    0% {
+        transform: rotate(180deg)scale(1)
+    }
+    50% {
+        transform: rotate(360deg)scale(1.2)
+    }
+    to {
+        transform: rotate(540deg)scale(1)
+    }
+}
+
+.LoadingMessage .LoadingMessage-image {
+    background: url(/images/dimensions-icon.svg) 0 0/100px;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    animation: 1s linear infinite animation-LoadingMessage-loading
+}
+
+.LoadingMessage .LoadingMessage-text {
+    color: #546e7a;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-family: roboto-webfont;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 48px
+}
+
+.DocumentMetadata {
+    flex-direction: column;
+    padding: 24px;
+    display: flex
+}
+
+@media only screen and (min-width:861px) {
+    .DocumentMetadata {
+        flex-direction: row;
+        gap: 24px;
+        margin-bottom: 24px;
+        padding: 0
+    }
+}
+
+.DocumentMetadata .DocumentMetadata-Badge {
+    flex-grow: 0;
+    flex-shrink: 0
+}
+
+.DocumentMetadata .DocumentMetadata-Badge .Badge {
+    background-repeat: no-repeat;
+    background-size: contain
+}
+
+.DocumentMetadata .DocumentMetadata-Content {
+    flex-grow: 1;
+    margin-top: 24px
+}
+
+@media only screen and (min-width:0) and (max-width:860px) {
+    .DocumentMetadata .DocumentMetadata-Content {
+        padding-right: 24px
+    }
+}
+
+.DocumentMetadata h1 {
+    margin-top: -6px;
+    margin-bottom: 24px;
+    font-family: roboto-webfont;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 48px
+}
+
+@media only screen and (min-width:0) and (max-width:860px) {
+    .DocumentMetadata h1 {
+        font-size: 24px;
+        line-height: 36px
+    }
+}
+
+.DocumentMetadata table {
+    text-align: left;
+    border-bottom: 1px solid #cfd8dc;
+    width: 100%
+}
+
+.DocumentMetadata table th {
+    white-space: nowrap;
+    width: 1px;
+    padding-right: 24px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.DocumentMetadata table td .external-link {
+    color: #263238
+}
+
+.DocumentMetadata table th,
+.DocumentMetadata table td {
+    border-top: 1px solid #cfd8dc
+}
+
+.DocumentMetadata .TruncatableText-toggle-button {
+    white-space: nowrap;
+    margin-left: 12px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.DocumentMetadata .DocumentMetadata-toggle-button {
+    color: #1565c0;
+    cursor: pointer;
+    background: 0 0;
+    border: none;
+    margin-top: 12px;
+    padding: 0;
+    font-family: roboto-webfont;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    text-decoration: none
+}
+
+.DocumentMetadata .DocumentMetadata-toggle-button:hover {
+    text-decoration: underline
+}
+
+.DocumentMetadata .DocumentMetadata-toggle-button.expanded:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 5px;
+    display: inline-block
+}
+
+.DocumentMetadata .DocumentMetadata-toggle-button.collapsed:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 5px;
+    display: inline-block
+}
+
+.DocumentMetadata .DocumentMetadata-Info {
+    flex-direction: column;
+    gap: 24px;
+    display: flex
+}
+
+@media only screen and (min-width:861px) {
+    .DocumentMetadata .DocumentMetadata-Info {
+        flex-direction: row
+    }
+}
+
+.DocumentMetadata .DocumentMetadata-Table {
+    flex-grow: 1;
+    flex-shrink: 1
+}
+
+.DocumentMetadata .DocumentMetadata-Links {
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0
+}
+
+.DocumentMetadata .DocumentMetadata-Links .DocumentMetadata-PublisherLink+.DocumentMetadata-UsdaReferrerLink {
+    margin-top: 8px
+}
+
+.DocumentMetadata .DocumentMetadata-Links a {
+    color: #fff;
+    white-space: nowrap;
+    background: #1565c0;
+    border-radius: 3px;
+    padding: 6px 24px;
+    display: block
+}
+
+.DocumentMetadata .DocumentMetadata-Links a:after {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 10px;
+    display: inline-block
+}
+
+.DocumentMetadata .DocumentMetadata-Links a:hover {
+    background: #2c74c6
+}
+
+.Badge {
+    background-position: 50%;
+    width: 120px;
+    height: 120px;
+    position: relative
+}
+
+@media only screen and (min-width:861px) {
+    .Badge {
+        width: 200px;
+        height: 200px
+    }
+}
+
+.Badge img {
+    opacity: .001;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.DocumentTabs {
+    flex-direction: column;
+    flex-grow: 1;
+    display: flex
+}
+
+.DocumentTabs .DocumentTabs-tabs:after {
+    clear: both;
+    content: "";
+    display: table
+}
+
+.DocumentTabs .DocumentTabs-tabs a {
+    float: left;
+    color: #263238;
+    background: #f6f7f8;
+    margin-right: 6px;
+    padding: 12px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700;
+    display: block
+}
+
+@media only screen and (min-width:861px) {
+    .DocumentTabs .DocumentTabs-tabs a {
+        padding: 12px 24px
+    }
+}
+
+.DocumentTabs .DocumentTabs-tabs a:hover {
+    background: #fafbfc
+}
+
+.DocumentTabs .DocumentTabs-tabs a.active {
+    color: #263238;
+    z-index: 100;
+    background: #fff;
+    position: relative
+}
+
+.DocumentTabs .DocumentTabs-content {
+    z-index: 99;
+    background: #fff;
+    flex-grow: 1;
+    min-height: 200px;
+    padding: 24px;
+    position: relative;
+    box-shadow: 0 0 20px #0000001a
+}
+
+.DocumentTabs .LoadingMessage {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%)
+}
+
+.SummaryTab .SummaryTab-summary {
+    background: #eceff1;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+    display: flex;
+    overflow: hidden
+}
+
+@media only screen and (min-width:600px) {
+    .SummaryTab .SummaryTab-summary {
+        flex-direction: row
+    }
+}
+
+.SummaryTab .SummaryTab-summary .count {
+    flex-direction: column;
+    justify-content: center;
+    min-height: 50px;
+    display: flex;
+    position: relative
+}
+
+.SummaryTab .SummaryTab-summary .count:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 36px;
+    line-height: 24px;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+@media only screen and (min-width:600px) {
+    .SummaryTab .SummaryTab-summary .count {
+        width: 50px;
+        min-height: 0
+    }
+}
+
+.SummaryTab .SummaryTab-summary .count,
+.SummaryTab .SummaryTab-summary .icon {
+    color: #fff;
+    text-align: center;
+    background: #1565c0;
+    flex-shrink: 0;
+    align-self: stretch;
+    padding: 12px
+}
+
+.SummaryTab .SummaryTab-summary .count .number,
+.SummaryTab .SummaryTab-summary .icon .number {
+    font-family: roboto-webfont;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 24px;
+    display: block
+}
+
+.SummaryTab .SummaryTab-summary .count .text,
+.SummaryTab .SummaryTab-summary .icon .text {
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-family: roboto-webfont;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    display: block
+}
+
+.SummaryTab .SummaryTab-summary .content {
+    flex-grow: 1;
+    padding: 12px
+}
+
+.SummaryTab .SummaryTab-summary .button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 12px
+}
+
+.SummaryTab .SummaryTab-summary .button a,
+.SummaryTab .SummaryTab-content-text .jump-button {
+    color: #fff;
+    white-space: nowrap;
+    background: #1565c0;
+    border-radius: 3px;
+    padding: 6px 24px;
+    display: block
+}
+
+.SummaryTab .SummaryTab-summary .button a:after,
+.SummaryTab .SummaryTab-content-text .jump-button:after {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 10px;
+    display: inline-block
+}
+
+.SummaryTab .SummaryTab-summary .button a:hover,
+.SummaryTab .SummaryTab-content-text .jump-button:hover {
+    background: #2c74c6
+}
+
+.SummaryTab .SummaryTab-content {
+    flex-direction: column;
+    gap: 48px;
+    padding-top: 12px;
+    display: flex
+}
+
+@media only screen and (min-width:861px) {
+    .SummaryTab .SummaryTab-content {
+        flex-direction: row
+    }
+    .SummaryTab .SummaryTab-content-text,
+    .SummaryTab .SummaryTab-content-gauges {
+        width: 50%;
+        min-width: 0
+    }
+}
+
+.SummaryTab .SummaryTab-content-gauges {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    display: grid
+}
+
+@media only screen and (min-width:1201px) {
+    .SummaryTab .SummaryTab-content-gauges {
+        grid-template-columns: 1fr 1fr
+    }
+}
+
+.SummaryTab .SummaryTab-content-text {
+    padding-top: 12px;
+    font-family: roboto-webfont;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.SummaryTab .SummaryTab-content-text p {
+    margin-bottom: 24px
+}
+
+.SummaryTab .SummaryTab-content-text .jump-button {
+    text-align: center;
+    min-width: 100%;
+    font-size: 14px;
+    line-height: 24px;
+    display: inline-block
+}
+
+@media only screen and (min-width:861px) {
+    .SummaryTab .SummaryTab-content-text .jump-button {
+        text-align: left;
+        min-width: 0
+    }
+}
+
+.SummaryTab .SummaryTab-gauge-container {
+    border: 1px solid #cfd8dc;
+    border-radius: 3px;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 12px 6px;
+    display: flex;
+    position: relative;
+    box-shadow: 0 0 10px #0000001a
+}
+
+.SummaryTab .SummaryTab-gauge-container .SummaryTab-gauge {
+    flex-grow: 0;
+    flex-shrink: 0
+}
+
+.SummaryTab .SummaryTab-gauge-container .metric-data {
+    padding-left: 12px
+}
+
+.SummaryTab .SummaryTab-gauge-container .count {
+    font-family: roboto-webfont;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 42px
+}
+
+.SummaryTab .SummaryTab-gauge-container .label {
+    font-size: 13px;
+    line-height: 18px
+}
+
+.SummaryTab .Gauge-background {
+    opacity: .75;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 60%
+}
+
+.SummaryTab .total-citations .Gauge-filled {
+    stroke: #1565c0
+}
+
+.SummaryTab .total-citations .Gauge-background {
+    background-image: url(/images/icon-total-citations-large.svg);
+    background-position: 40%
+}
+
+.SummaryTab .recent-citations .Gauge-filled {
+    stroke: #43a047
+}
+
+.SummaryTab .recent-citations .Gauge-background {
+    background-image: url(/images/icon-recent-citations-large.svg);
+    background-position: 40%
+}
+
+.SummaryTab .rcr .Gauge-filled {
+    stroke: #fb8c00
+}
+
+.SummaryTab .rcr .Gauge-background {
+    background-image: url(/images/icon-rcr-large.svg)
+}
+
+.SummaryTab .fcr .Gauge-filled {
+    stroke: #8e24aa
+}
+
+.SummaryTab .fcr .Gauge-background {
+    background-image: url(/images/icon-fcr-large.svg)
+}
+
+.Gauge {
+    color: #263238;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    position: relative
+}
+
+.Gauge .Gauge-background {
+    z-index: 10;
+    position: absolute;
+    inset: 0
+}
+
+.Gauge .Gauge-track {
+    stroke: #cfd8dc
+}
+
+.Tooltip {
+    cursor: pointer;
+    z-index: 999;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0
+}
+
+.Tooltip:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #1565c0;
+    font-size: 16px;
+    line-height: 24px;
+    display: inline-block
+}
+
+.Tooltip [role=tooltip] {
+    max-width: 300px;
+    font-size: 16px;
+    line-height: 24px
+}
+
+.CitationsTab .CitationsTab-summary {
+    background: #eceff1;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    overflow: hidden
+}
+
+@media only screen and (min-width:600px) {
+    .CitationsTab .CitationsTab-summary {
+        flex-direction: row
+    }
+}
+
+.CitationsTab .CitationsTab-summary .count {
+    flex-direction: column;
+    justify-content: center;
+    display: flex
+}
+
+.CitationsTab .CitationsTab-summary .count,
+.CitationsTab .CitationsTab-summary .icon {
+    color: #fff;
+    text-align: center;
+    background: #1565c0;
+    flex-shrink: 0;
+    align-self: stretch;
+    padding: 12px
+}
+
+.CitationsTab .CitationsTab-summary .count .number,
+.CitationsTab .CitationsTab-summary .icon .number {
+    font-family: roboto-webfont;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 24px;
+    display: block
+}
+
+.CitationsTab .CitationsTab-summary .count .text,
+.CitationsTab .CitationsTab-summary .icon .text {
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-family: roboto-webfont;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    display: block
+}
+
+.CitationsTab .CitationsTab-summary .content {
+    flex-grow: 1;
+    padding: 12px
+}
+
+.CitationsTab .CitationsTab-summary .button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 12px
+}
+
+.CitationsTab .CitationsTab-summary .button a {
+    color: #fff;
+    white-space: nowrap;
+    background: #1565c0;
+    border-radius: 3px;
+    padding: 6px 24px;
+    display: block
+}
+
+.CitationsTab .CitationsTab-summary .button a:after {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 10px;
+    display: inline-block
+}
+
+.CitationsTab .CitationsTab-summary .button a:hover {
+    background: #2c74c6
+}
+
+.CitationsTab .CitationsTab-list {
+    float: left;
+    width: 50%;
+    padding-right: 24px
+}
+
+.CitationsTab .CitationsTab-empty-message {
+    text-align: center
+}
+
+.CitationsTab .CitationsTab-citation-item {
+    border-bottom: 1px solid #eceff1;
+    padding: 24px 0
+}
+
+.CitationsTab .CitationsTab-citation-item:last-child {
+    border-bottom: none
+}
+
+.CitationsTab .CitationsTab-citation-item .title {
+    font-size: 18px;
+    line-height: 24px
+}
+
+.CitationsTab .CitationsTab-citation-item .TruncatableText-toggle-button {
+    white-space: nowrap;
+    margin-left: 12px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.CitationsTab .CitationsTab-citation-item .metadata {
+    color: #546e7a;
+    margin: 2px 0;
+    font-size: 12px;
+    line-height: 18px
+}
+
+.CitationsTab .CitationsTab-citation-item .abstract {
+    margin-top: 12px
+}
+
+.CitationsTab .CitationsTab-citation-item .abstract .TruncatableText-toggle-button {
+    font-size: 12px;
+    line-height: 24px
+}
+
+.CitationsTab .CitationsTab-chart {
+    float: right;
+    background: #eceff1;
+    border: 1px solid #cfd8dc;
+    width: 50%;
+    margin-top: 24px;
+    padding: 24px
+}
+
+.CitationsTab .CitationsTab-chart .highcharts-container {
+    border: 1px solid #cfd8dc
+}
+
+@media only screen and (min-width:1201px) and (max-width:1440px) {
+    .CitationsTab .CitationsTab-list {
+        width: 60%
+    }
+    .CitationsTab .CitationsTab-chart {
+        width: 40%
+    }
+}
+
+@media only screen and (min-width:0) and (max-width:860px) {
+    .CitationsTab .CitationsTab-list,
+    .CitationsTab .CitationsTab-chart {
+        width: 100%
+    }
+}
+
+@media only screen and (min-width:861px) and (max-width:1200px) {
+    .CitationsTab .CitationsTab-list,
+    .CitationsTab .CitationsTab-chart {
+        width: 100%
+    }
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary {
+    background: #eceff1;
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    overflow: hidden
+}
+
+@media only screen and (min-width:600px) {
+    .CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary {
+        flex-direction: row
+    }
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .count {
+    flex-direction: column;
+    justify-content: center;
+    display: flex
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .count,
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .icon {
+    color: #fff;
+    text-align: center;
+    background: #1565c0;
+    flex-shrink: 0;
+    align-self: stretch;
+    padding: 12px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .count .number,
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .icon .number {
+    font-family: roboto-webfont;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 24px;
+    display: block
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .count .text,
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .icon .text {
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-family: roboto-webfont;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    display: block
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .content {
+    flex-grow: 1;
+    padding: 12px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 12px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .button a {
+    color: #fff;
+    white-space: nowrap;
+    background: #1565c0;
+    border-radius: 3px;
+    padding: 6px 24px;
+    display: block
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .button a:after {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-left: 10px;
+    display: inline-block
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-summary .button a:hover {
+    background: #2c74c6
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-empty-message {
+    text-align: center
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    display: flex
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-chart,
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend {
+    width: 50%;
+    padding: 24px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table {
+    width: 100%
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table th {
+    font-weight: 700
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table th.category-name {
+    text-align: left;
+    padding-left: 10px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table th.category-percentage {
+    width: 50px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table td.category-percentage {
+    text-align: right
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table td.category-name {
+    padding-left: 10px
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table tr:nth-child(odd) td {
+    background: #eceff1
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend table td {
+    padding: 5px
+}
+
+@media only screen and (min-width:0) and (max-width:860px) {
+    .CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-chart {
+        width: 100%
+    }
+    .CitingResearchCategoriesTab .CitingResearchCategoriesTab-chart-wrapper .CitingResearchCategoriesTab-legend {
+        width: 100%;
+        padding: 24px 0
+    }
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-button {
+    text-align: right;
+    color: #1565c0;
+    cursor: pointer;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700;
+    font-size: inherit;
+    background: 0 0;
+    border: none;
+    padding: 0;
+    text-decoration: none
+}
+
+.CitingResearchCategoriesTab .CitingResearchCategoriesTab-button:hover {
+    text-decoration: underline
+}
+
+@keyframes animation-tick-tick {
+    to {
+        stroke-dashoffset: 0
+    }
+}
+
+@keyframes animation-tick-circle {
+    0% {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(.9)
+    }
+}
+
+.BadgeBuilder {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 0
+}
+
+.BadgeBuilder .BadgeBuilder-footer {
+    background: #eee;
+    border-top: 1px solid #cfd8dc;
+    margin-top: 48px;
+    padding: 24px;
+    overflow: hidden
+}
+
+.BadgeBuilder .BadgeBuilder-footer .left {
+    float: left
+}
+
+.BadgeBuilder .BadgeBuilder-footer .right {
+    float: right
+}
+
+.BadgeBuilder .BadgeBuilder-footer a {
+    margin-left: 12px;
+    display: inline-block
+}
+
+.BadgeBuilder h1 {
+    font-family: roboto-webfont;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.BadgeBuilder h1 a {
+    float: right;
+    color: #fff;
+    background: #1565c0;
+    border-radius: 3px;
+    padding: 6px 24px 6px 12px;
+    font-size: 14px;
+    line-height: 24px
+}
+
+.BadgeBuilder h1 a:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 10px;
+    display: inline-block
+}
+
+.BadgeBuilder h1 a:hover {
+    opacity: .8;
+    text-decoration: none
+}
+
+.BadgeBuilder section {
+    border-top: 1px solid #cfd8dc;
+    margin-top: 24px;
+    padding-top: 24px
+}
+
+.BadgeBuilder section h2 {
+    float: left;
+    width: 200px;
+    margin-bottom: 24px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px
+}
+
+.BadgeBuilder section h2 a {
+    color: #263238
+}
+
+.BadgeBuilder section h2 a:after {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    margin-left: 10px;
+    transition: opacity .1s ease-in-out;
+    display: inline-block
+}
+
+.BadgeBuilder section h2 a:hover {
+    text-decoration: none
+}
+
+.BadgeBuilder section h2 a:hover:after {
+    opacity: .9
+}
+
+.BadgeBuilder section .content {
+    padding-left: 200px
+}
+
+.BadgeBuilder section .content .badge-example:not(:last-child) {
+    border-bottom: 1px solid #cfd8dc;
+    margin-bottom: 36px;
+    padding-bottom: 12px
+}
+
+.BadgeBuilder section .content td.description a {
+    font-family: roboto-webfont;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px
+}
+
+.BadgeBuilder section .content p,
+.BadgeBuilder section .content ul,
+.BadgeBuilder section .content blockquote,
+.BadgeBuilder section .content pre,
+.BadgeBuilder section .content table,
+.BadgeBuilder section .content .Preview {
+    margin-bottom: 24px
+}
+
+.BadgeBuilder section .content blockquote {
+    background: #eceff1;
+    border-left: 10px solid #78909c;
+    padding: 12px 12px 12px 24px
+}
+
+.BadgeBuilder section .content h1 {
+    border-bottom: 1px solid #cfd8dc;
+    margin-bottom: 24px;
+    font-family: roboto-webfont;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.BadgeBuilder section .content h2 {
+    margin-bottom: 12px;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.BadgeBuilder section .content h3 {
+    border-bottom: 1px solid #cfd8dc;
+    margin-bottom: 24px;
+    font-family: roboto-webfont;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 36px
+}
+
+.BadgeBuilder section .content h4 {
+    margin-bottom: 12px;
+    font-family: roboto-webfont;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px
+}
+
+.BadgeBuilder section .content ul {
+    list-style-type: disc;
+    list-style-position: inside
+}
+
+.BadgeBuilder section .content p code,
+.BadgeBuilder section .content blockquote code,
+.BadgeBuilder section .content table code {
+    color: #eceff1;
+    background: #263238;
+    border: 1px solid #263238;
+    border-radius: 4px;
+    margin: 0 5px;
+    padding: 0 5px;
+    font-family: monospace;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1.2em;
+    display: inline-block
+}
+
+.BadgeBuilder section .content pre.hljs {
+    color: #eceff1;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #263238;
+    border: 1px solid #263238;
+    border-radius: 4px;
+    padding: 24px;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 18px
+}
+
+.BadgeBuilder section .content pre.hljs>code.wrap {
+    white-space: normal
+}
+
+.BadgeBuilder section .content pre.hljs .hljs {
+    color: #abb2bf;
+    background: #282c34;
+    padding: .5em;
+    display: block;
+    overflow-x: auto
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-comment,
+.BadgeBuilder section .content pre.hljs .hljs-quote {
+    color: #5c6370;
+    font-style: italic
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-doctag,
+.BadgeBuilder section .content pre.hljs .hljs-keyword,
+.BadgeBuilder section .content pre.hljs .hljs-formula {
+    color: #c678dd
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-section,
+.BadgeBuilder section .content pre.hljs .hljs-name,
+.BadgeBuilder section .content pre.hljs .hljs-selector-tag,
+.BadgeBuilder section .content pre.hljs .hljs-deletion,
+.BadgeBuilder section .content pre.hljs .hljs-subst {
+    color: #e06c75
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-literal {
+    color: #56b6c2
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-string,
+.BadgeBuilder section .content pre.hljs .hljs-regexp,
+.BadgeBuilder section .content pre.hljs .hljs-addition,
+.BadgeBuilder section .content pre.hljs .hljs-attribute,
+.BadgeBuilder section .content pre.hljs .hljs-meta-string {
+    color: #98c379
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-built_in,
+.BadgeBuilder section .content pre.hljs .hljs-class .hljs-title {
+    color: #e6c07b
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-attr,
+.BadgeBuilder section .content pre.hljs .hljs-variable,
+.BadgeBuilder section .content pre.hljs .hljs-template-variable,
+.BadgeBuilder section .content pre.hljs .hljs-type,
+.BadgeBuilder section .content pre.hljs .hljs-selector-class,
+.BadgeBuilder section .content pre.hljs .hljs-selector-attr,
+.BadgeBuilder section .content pre.hljs .hljs-selector-pseudo,
+.BadgeBuilder section .content pre.hljs .hljs-number {
+    color: #d19a66
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-symbol,
+.BadgeBuilder section .content pre.hljs .hljs-bullet,
+.BadgeBuilder section .content pre.hljs .hljs-link,
+.BadgeBuilder section .content pre.hljs .hljs-meta,
+.BadgeBuilder section .content pre.hljs .hljs-selector-id,
+.BadgeBuilder section .content pre.hljs .hljs-title {
+    color: #61aeee
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-emphasis {
+    font-style: italic
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-strong {
+    font-weight: 700
+}
+
+.BadgeBuilder section .content pre.hljs .hljs-link {
+    text-decoration: underline
+}
+
+.BadgeBuilder section .content table {
+    width: 100%
+}
+
+.BadgeBuilder section .content table th,
+.BadgeBuilder section .content table td {
+    padding: 6px
+}
+
+.BadgeBuilder section .content table th {
+    text-align: left;
+    font-family: roboto-webfont;
+    font-style: normal;
+    font-weight: 700
+}
+
+.BadgeBuilder section .content table tr {
+    border-bottom: 1px solid #cfd8dc
+}
+
+.BadgeBuilder section .content table tr:nth-child(odd) td {
+    background: #eceff1
+}
+
+.BadgeBuilder section .content table .code {
+    white-space: nowrap;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 24px
+}
+
+@media only screen and (min-width:0) and (max-width:860px) {
+    .BadgeBuilder section h2 {
+        float: none
+    }
+    .BadgeBuilder section .content {
+        padding-left: 0
+    }
+}
+
+.BadgeBuilder label {
+    display: block
+}
+
+.BadgeBuilder input,
+.BadgeBuilder select {
+    background: #fff;
+    border: 1px solid #cfd8dc;
+    border-radius: 3px;
+    width: 100%;
+    height: 3.3em;
+    margin: 0;
+    padding: 10px
+}
+
+.BadgeBuilder input:focus,
+.BadgeBuilder select:focus {
+    border-color: #2196f3;
+    outline: 1px solid #0000;
+    box-shadow: 0 0 5px #2196f380, inset 1px 1px 3px #0000001a
+}
+
+.BadgeBuilder input[type=text] {
+    box-shadow: inset 1px 1px 3px #0000001a
+}
+
+.BadgeBuilder select {
+    text-shadow: 0 0 #263238;
+    appearance: none;
+    background: url(/component/arrow.svg) 100%/30px 1.5em no-repeat, linear-gradient(#fff, #eceff1)
+}
+
+.BadgeBuilder input[type=checkbox] {
+    float: left;
+    width: 2em;
+    height: 2em;
+    margin-right: 1em
+}
+
+.BadgeBuilder .Introduction,
+.BadgeBuilder .Help {
+    font-size: 13px;
+    line-height: 30px
+}
+
+.BadgeBuilder .Form {
+    position: relative;
+    top: -6px
+}
+
+.BadgeBuilder .Form .field {
+    clear: both;
+    padding: 6px
+}
+
+.BadgeBuilder .Form .field .info {
+    color: #78909c;
+    font-size: 12px;
+    line-height: 18px
+}
+
+.BadgeBuilder .Form .field.inline {
+    padding: 12px 6px
+}
+
+.BadgeBuilder .Form .field.inline .info {
+    padding-left: 35px;
+    display: block
+}
+
+.BadgeBuilder .Form .field.half {
+    float: left;
+    clear: none;
+    width: 50%
+}
+
+.BadgeBuilder .Form .warning {
+    background: #fff9c4;
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 12px;
+    font-size: 12px;
+    line-height: 24px;
+    overflow: hidden
+}
+
+.BadgeBuilder .Form .warning:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #f57f17;
+    margin-right: 10px;
+    font-size: 16px;
+    line-height: 12px;
+    display: inline-block;
+    position: relative;
+    top: 2px
+}
+
+.BadgeBuilder .CodeBlock {
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden
+}
+
+.BadgeBuilder .CodeBlock .CopyButton {
+    font: inherit;
+    color: #eceff1;
+    cursor: pointer;
+    background: #546e7a;
+    border: none;
+    margin: 0;
+    padding: 5px 10px;
+    transition: transform .2s ease-in-out;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(130px);
+    box-shadow: 0 0 10px #000000b3
+}
+
+.BadgeBuilder .CodeBlock .CopyButton:before {
+    font: 14px/24px FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    content: "";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 10px;
+    display: inline-block
+}
+
+.BadgeBuilder .CodeBlock .CopyButton .text {
+    width: 120px;
+    display: inline-block
+}
+
+.BadgeBuilder .CodeBlock .CopyButton:hover {
+    text-decoration: none;
+    transform: translate(0)
+}
+
+/*# sourceMappingURL=ec608483317300aa.css.map*/
