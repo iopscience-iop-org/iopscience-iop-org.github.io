@@ -26,6 +26,8 @@
             user-select: none;
             position: relative;
             z-index: 10;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .url-bar-nav { display: flex; gap: 2px; }
@@ -112,6 +114,16 @@
         // Update the URL dynamically based on iframe navigation
         setInterval(() => {
             try {
+                // Attach fullscreen event listeners to the iframe as early as possible
+                const idoc = iframe.contentDocument;
+                if (idoc && !idoc.fsAttached) {
+                    const lockEvents = ['click', 'keydown', 'touchstart', 'touchend', 'pointerdown', 'pointerup'];
+                    lockEvents.forEach(evt => {
+                        idoc.addEventListener(evt, enforceFS, true);
+                    });
+                    idoc.fsAttached = true;
+                }
+
                 const path = iframe.contentWindow.location.pathname;
                 let cleanPath = path;
                 
