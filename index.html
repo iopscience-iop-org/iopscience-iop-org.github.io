@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        // Prevent nested wrappers (multiple URL bars)
-        if (window !== window.top) {
-            window.top.location.href = window.location.href;
-        }
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Astrophysical Journal</title>
     <link rel="icon" type="image/x-icon" href="/Final_Astrophysical_Journal/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; }
         body, html { margin: 0; padding: 0; height: 100%; height: 100dvh; background: #000; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; overscroll-behavior: none; }
         
+        /* ===== SPLASH SCREEN - covers EVERYTHING instantly ===== */
+        #splash {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 99999;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 18px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        #splash.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #splash-text {
+            color: rgba(255,255,255,0.7); font-size: 15px; font-weight: 400;
+            letter-spacing: 0.3px; animation: pulse 2s ease-in-out infinite;
+        }
+        #splash-icon {
+            width: 48px; height: 48px; border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            border-top-color: rgba(255,255,255,0.6);
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+        /* ===== MAIN CONTENT - hidden until fullscreen ===== */
+        #main-wrapper {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+        }
+
         #custom-url-bar {
             height: 42px;
             background: linear-gradient(180deg, #202124 0%, #1a1c1f 100%);
@@ -27,7 +58,7 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            box-sizing: border-box;
+            flex-shrink: 0;
         }
 
         .url-bar-nav { display: flex; gap: 2px; }
@@ -64,7 +95,7 @@
             #custom-url-bar { padding: 0 8px; gap: 4px; }
         }
 
-        #stealthFrame { width: 100%; height: calc(100% - 42px); border: none; display: block; background: #fff; overscroll-behavior: none; }
+        #stealthFrame { width: 100%; flex: 1; border: none; display: block; background: #fff; overscroll-behavior: none; }
         
         #exit-fs {
             position: fixed; bottom: 20px; right: 20px; width: 44px; height: 44px;
@@ -77,48 +108,161 @@
     </style>
 </head>
 <body>
-    <div id="custom-url-bar">
-        <div class="url-bar-nav">
-            <button class="url-bar-nav-btn" onclick="document.getElementById('stealthFrame').contentWindow.history.back()">
-                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            </button>
-            <button class="url-bar-nav-btn" onclick="document.getElementById('stealthFrame').contentWindow.history.forward()">
-                <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            </button>
-            <button class="url-bar-nav-btn" onclick="document.getElementById('stealthFrame').contentWindow.location.reload()">
-                <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-            </button>
-        </div>
-        <div class="url-bar-input-wrapper">
-            <span class="url-bar-lock-icon">
-                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-            </span>
-            <span class="url-bar-url-text">
-                <span class="url-protocol">https://</span><span class="url-domain">iopscience.iop.org</span><span class="url-path" id="display-path">/journal/0004-637X</span>
-            </span>
-        </div>
+    <!-- SPLASH SCREEN: Covers everything instantly. No URL visible. -->
+    <div id="splash">
+        <div id="splash-icon"></div>
+        <div id="splash-text">Click anywhere to continue</div>
     </div>
 
-    <!-- The iframe loads the target content locally for github pages. -->
-    <iframe id="stealthFrame" src="home.html"></iframe>
+    <div id="main-wrapper">
+        <div id="custom-url-bar">
+            <div class="url-bar-nav">
+                <button class="url-bar-nav-btn" onclick="document.getElementById('stealthFrame').contentWindow.history.back()">
+                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                </button>
+                <button class="url-bar-nav-btn" onclick="document.getElementById('stealthFrame').contentWindow.history.forward()">
+                    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </button>
+                <button class="url-bar-nav-btn" onclick="document.getElementById('stealthFrame').contentWindow.location.reload()">
+                    <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                </button>
+            </div>
+            <div class="url-bar-input-wrapper">
+                <span class="url-bar-lock-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                </span>
+                <span class="url-bar-url-text">
+                    <span class="url-protocol">https://</span><span class="url-domain">iopscience.iop.org</span><span class="url-path" id="display-path">/journal/0004-637X</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- The iframe loads the target content locally for github pages. -->
+        <iframe id="stealthFrame" src="home.html"></iframe>
+    </div>
     
     <button id="exit-fs" onclick="document.exitFullscreen()">
         <svg viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
     </button>
 
     <script>
+        // ===== INSTANT FULLSCREEN SYSTEM =====
+        // The splash screen covers everything from the very first paint.
+        // No URL, no content is ever visible until fullscreen is achieved.
+        
+        const splash = document.getElementById('splash');
         const iframe = document.getElementById('stealthFrame');
         const displayPath = document.getElementById('display-path');
         const exitFs = document.getElementById('exit-fs');
+        let fsAchieved = false;
+        let splashDismissed = false;
+
+        // Prevent nested wrappers
+        if (window !== window.top) {
+            window.top.location.href = window.location.href;
+        }
+
+        function goFullscreen() {
+            const el = document.documentElement;
+            const rfs = el.requestFullscreen || 
+                        el.webkitRequestFullscreen || 
+                        el.mozRequestFullScreen || 
+                        el.msRequestFullscreen;
+            if (rfs) {
+                return rfs.call(el).then(() => {
+                    fsAchieved = true;
+                    dismissSplash();
+                }).catch((e) => {
+                    // If fullscreen fails (e.g. not a user gesture), keep splash visible
+                    // Update text to guide the user
+                    document.getElementById('splash-text').textContent = 'Click anywhere to continue';
+                });
+            }
+        }
+
+        function dismissSplash() {
+            if (splashDismissed) return;
+            splashDismissed = true;
+            splash.classList.add('hidden');
+            // Remove splash from DOM after transition
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 350);
+        }
+
+        // The SINGLE handler for the splash screen click.
+        // This guarantees fullscreen on the very first interaction.
+        function handleFirstInteraction(e) {
+            if (fsAchieved) return;
+            goFullscreen();
+        }
+
+        // Attach to splash (the only visible thing)
+        splash.addEventListener('click', handleFirstInteraction, true);
+        splash.addEventListener('touchstart', handleFirstInteraction, true);
+        splash.addEventListener('keydown', handleFirstInteraction, true);
+        splash.addEventListener('pointerdown', handleFirstInteraction, true);
+
+        // Also try on any body interaction in case splash is somehow bypassed
+        document.addEventListener('click', handleFirstInteraction, true);
+        document.addEventListener('touchstart', handleFirstInteraction, true);
+        document.addEventListener('keydown', handleFirstInteraction, true);
+        document.addEventListener('pointerdown', handleFirstInteraction, true);
+
+        function enforceFS(e) {
+            const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+            if (!isFS && fsAchieved) {
+                goFullscreen();
+            }
+        }
+
+        // Once fullscreen is achieved, keep enforcing it on user interactions
+        document.addEventListener('fullscreenchange', handleFS);
+        document.addEventListener('webkitfullscreenchange', handleFS);
         
-        // Update the URL dynamically based on iframe navigation
+        function handleFS() {
+            const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+            if (isFS) {
+                fsAchieved = true;
+                exitFs.style.display = 'flex';
+                dismissSplash();
+            } else {
+                exitFs.style.display = 'none';
+                // Re-enter fullscreen immediately if it was lost
+                if (fsAchieved) {
+                    goFullscreen();
+                }
+            }
+        }
+
+        // After fullscreen, enforce it on all interactions (including inside iframe)
+        function attachEnforcement() {
+            const evts = ['click', 'keydown', 'touchstart', 'touchend', 'pointerdown', 'pointerup'];
+            evts.forEach(evt => {
+                document.addEventListener(evt, enforceFS, true);
+            });
+        }
+        attachEnforcement();
+
+        window.addEventListener('resize', () => {
+            const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+            if (!isFS && fsAchieved) goFullscreen();
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && fsAchieved) {
+                goFullscreen();
+            }
+        });
+
+        // ===== URL BAR & IFRAME MANAGEMENT =====
         setInterval(() => {
             try {
-                // Attach fullscreen event listeners to the iframe as early as possible
+                // Attach fullscreen enforcement to iframe content
                 const idoc = iframe.contentDocument;
                 if (idoc && !idoc.fsAttached) {
-                    const lockEvents = ['click', 'keydown', 'touchstart', 'touchend', 'pointerdown', 'pointerup'];
-                    lockEvents.forEach(evt => {
+                    const evts = ['click', 'keydown', 'touchstart', 'touchend', 'pointerdown', 'pointerup'];
+                    evts.forEach(evt => {
                         idoc.addEventListener(evt, enforceFS, true);
                     });
                     idoc.fsAttached = true;
@@ -161,70 +305,16 @@
                 });
             } catch(e) {}
         }, 100);
-        
-        function goFullscreen() {
-            const el = document.documentElement;
-            const rfs = el.requestFullscreen || 
-                        el.webkitRequestFullscreen || 
-                        el.mozRequestFullScreen || 
-                        el.msRequestFullscreen;
-            if (rfs) {
-                rfs.call(el).catch((e) => {
-                    // Ignore rejection if not initiated by user gesture
-                });
-            }
-        }
-
-        function enforceFS(e) {
-            const isFS = document.fullscreenElement || document.webkitFullscreenElement;
-            if (!isFS) {
-                goFullscreen();
-            }
-        }
-
-        // Forcefully try to enter fullscreen on load
-        window.addEventListener('load', () => {
-            setTimeout(goFullscreen, 100);
-        });
-        
-        // Seamlessly trap any user interaction to snap back into fullscreen if lost
-        const lockEvents = ['click', 'keydown', 'touchstart', 'touchend', 'pointerdown', 'pointerup'];
-        lockEvents.forEach(evt => {
-            document.addEventListener(evt, enforceFS, true);
-        });
-
-        window.addEventListener('resize', () => {
-            const isFS = document.fullscreenElement || document.webkitFullscreenElement;
-            if (!isFS) goFullscreen();
-        });
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                goFullscreen();
-            }
-        });
 
         iframe.addEventListener('load', () => {
             try {
                 const idoc = iframe.contentDocument;
-                lockEvents.forEach(evt => {
+                const evts = ['click', 'keydown', 'touchstart', 'touchend', 'pointerdown', 'pointerup'];
+                evts.forEach(evt => {
                     idoc.addEventListener(evt, enforceFS, true);
                 });
             } catch(e) {}
         });
-
-        document.addEventListener('fullscreenchange', handleFS);
-        document.addEventListener('webkitfullscreenchange', handleFS);
-        
-        function handleFS() {
-            const isFS = document.fullscreenElement || document.webkitFullscreenElement;
-            if (isFS) {
-                exitFs.style.display = 'flex';
-            } else {
-                exitFs.style.display = 'none';
-                goFullscreen(); // Try immediately
-            }
-        }
     </script>
 </body>
 </html>
