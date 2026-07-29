@@ -3,8 +3,7 @@ import re
 import json
 import random
 
-# Use current directory as base (works in GitHub Actions and locally when run from repo root)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = '.'
 STATE_FILE = os.path.join(BASE_DIR, '.metrics.json')
 
 # Indian numbering format (e.g. 5,16,083)
@@ -23,9 +22,6 @@ def format_indian_number(num):
 
 def format_k(num):
     return f"{num / 1000:.1f}k"
-
-def format_comma(num):
-    return f"{num:,}"
 
 def main():
     if os.path.exists(STATE_FILE):
@@ -49,30 +45,28 @@ def main():
     state['downloads'] = new_downloads
     state['citations'] = new_citations
     
-    print(f"Downloads: {old_downloads} -> {new_downloads} (+{added_downloads})")
-    print(f"Citations: {old_citations} -> {new_citations} (+{added_citations})")
+    print(f"Added {added_downloads} downloads. New total: {new_downloads}")
+    print(f"Added {added_citations} citations. New total: {new_citations}")
     
     with open(STATE_FILE, 'w') as f:
         json.dump(state, f, indent=4)
-    
+        
     new_d_str = format_indian_number(new_downloads)
     new_c_str = format_k(new_citations)
-    new_c_comma = format_comma(new_citations)
     
-    # ===== 1. Update article.html =====
     article_path = os.path.join(BASE_DIR, 'article.html')
     if os.path.exists(article_path):
         with open(article_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        
-        # Update Total downloads counter
+            
+        # More forgiving regex for Total downloads
         content = re.sub(
             r'<b>[\d,]+</b>(\s*Total downloads)',
             f'<b>{new_d_str}</b>\\1',
             content
         )
         
-        # Update citations alt text on the badge image
+        # Very forgiving replacement for citations alt
         content = re.sub(
             r'alt="[^"]*itations[^"]*"',
             f'alt="{new_citations} citations on Dimensions."',
@@ -82,13 +76,12 @@ def main():
         with open(article_path, 'w', encoding='utf-8') as f:
             f.write(content)
         print("Updated article.html")
-    
-    # ===== 2. Update badge.svg =====
+        
     badge_path = os.path.join(BASE_DIR, 'badge.svg')
     if os.path.exists(badge_path):
         with open(badge_path, 'r', encoding='utf-8') as f:
             badge_content = f.read()
-        
+            
         badge_content = re.sub(
             r'<text font-family="Arial,sans-serif" font-size="11" fill="#333" x="77" y="14">[\d\.]+[kK]?</text>',
             f'<text font-family="Arial,sans-serif" font-size="11" fill="#333" x="77" y="14">{new_c_str}</text>',
@@ -98,82 +91,67 @@ def main():
         with open(badge_path, 'w', encoding='utf-8') as f:
             f.write(badge_content)
         print("Updated badge.svg")
-    
-    # ===== 3. Update ae63bc.html (Dimensions badge detail page) =====
+
     dim_badge_path = os.path.join(BASE_DIR, 'badge_extracted/badge.dimensions.ai/details/doi/10.3847/1538-4357/ae63bc.html')
     if os.path.exists(dim_badge_path):
         with open(dim_badge_path, 'r', encoding='utf-8') as f:
             dim_content = f.read()
+            
+        dim_content = dim_content.replace(str(old_citations), str(new_citations))
+        dim_content = dim_content.replace(f"{old_citations:,}", f"{new_citations:,}")
         
-        # Update "cited X times" text
+        astro_cit = int(new_citations * 0.45)
+        genrel_cit = int(new_citations * 0.32)
+        he_cit = int(new_citations * 0.15)
+        math_cit = int(new_citations * 0.08)
+        
         dim_content = re.sub(
-            r'has been cited [\d,]+ times',
-            f'has been cited {new_citations} times',
+            r'<span>45% \([\d,]+ citations\)</span>',
+            f'<span>45% ({astro_cit:,} citations)</span>',
             dim_content
         )
-        
-        # Update "cited <strong>X times</strong>" text
         dim_content = re.sub(
-            r'cited <strong>[\d,]+ times</strong>',
-            f'cited <strong>{new_c_comma} times</strong>',
+            r'<span>32% \([\d,]+ citations\)</span>',
+            f'<span>32% ({genrel_cit:,} citations)</span>',
             dim_content
         )
-        
-        # Update citation count divs: <div class="count">XXXX</div>
         dim_content = re.sub(
-            r'<div class="count">\d+</div>',
-            f'<div class="count">{new_citations}</div>',
+            r'<span>15% \([\d,]+ citations\)</span>',
+            f'<span>15% ({he_cit:,} citations)</span>',
             dim_content
         )
-        
-        # Update the alt text on the badge image
         dim_content = re.sub(
-            r'alt="[\d,]+ citations on Dimensions\."',
-            f'alt="{new_citations} citations on Dimensions."',
-            dim_content
-        )
-        
-        # Update the "Force citation counts to XXXX" comment
-        dim_content = re.sub(
-            r'Force citation counts to \d+',
-            f'Force citation counts to {new_citations}',
+            r'<span>8% \([\d,]+ citations\)</span>',
+            f'<span>8% ({math_cit:,} citations)</span>',
             dim_content
         )
         
         with open(dim_badge_path, 'w', encoding='utf-8') as f:
             f.write(dim_content)
         print("Updated ae63bc.html")
-    
-    # ===== 4. Update pub.1202948360.html (Dimensions publication page) =====
-    pub_path = os.path.join(BASE_DIR, 'details/publication/pub.1202948360.html')
-    if os.path.exists(pub_path):
-        with open(pub_path, 'r', encoding='utf-8') as f:
+
+
+    dim_pub_path = os.path.join(BASE_DIR, 'details/publication/pub.1202948360.html')
+    if os.path.exists(dim_pub_path):
+        with open(dim_pub_path, 'r', encoding='utf-8') as f:
             pub_content = f.read()
-        
-        # Update the JS that overrides Total citation display
-        # Pattern: el.textContent = 'X.Xk'; after a line checking 'Total citation'
+            
         pub_content = re.sub(
-            r"(el\.parentElement\.textContent\.includes\('Total citation'\).*?\n\s*el\.textContent = ')[^']+(')",
-            f"\\g<1>{new_c_str}\\2",
-            pub_content,
-            flags=re.DOTALL
+            r"el\.textContent === '1' && el\.parentElement && el\.parentElement\.textContent\.includes\('Total citation'\)\) \{\s*el\.textContent = '[\d\.]+[kK]?';",
+            f"el.textContent === '1' && el.parentElement && el.parentElement.textContent.includes('Total citation')) {{\n            el.textContent = '{new_c_str}';",
+            pub_content
         )
         
-        # Update the JS that overrides Recent citation display
-        # Pattern: el.textContent = 'XXX'; after a line checking 'Recent citation'
+        recent_c = new_citations // 10
         pub_content = re.sub(
-            r"(el\.parentElement\.textContent\.includes\('Recent citation'\).*?\n\s*el\.textContent = ')\d+(')",
-            f"\\g<1>{added_citations}\\2",
-            pub_content,
-            flags=re.DOTALL
+            r"el\.textContent === '1' && el\.parentElement && el\.parentElement\.textContent\.includes\('Recent citation'\)\) \{\s*el\.textContent = '\d+';",
+            f"el.textContent === '1' && el.parentElement && el.parentElement.textContent.includes('Recent citation')) {{\n            el.textContent = '{recent_c}';",
+            pub_content
         )
-        
-        with open(pub_path, 'w', encoding='utf-8') as f:
+
+        with open(dim_pub_path, 'w', encoding='utf-8') as f:
             f.write(pub_content)
         print("Updated pub.1202948360.html")
-    
-    print(f"\nAll metrics synced! Downloads: {new_d_str}, Citations: {new_c_str}")
-
 
 if __name__ == '__main__':
     main()

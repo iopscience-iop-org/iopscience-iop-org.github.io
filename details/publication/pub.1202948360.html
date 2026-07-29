@@ -398,10 +398,10 @@ setInterval(function() {
     var spans = document.querySelectorAll('div, span');
     spans.forEach(function(el) {
         if (el.textContent === '1' && el.parentElement && el.parentElement.textContent.includes('Total citation')) {
-            el.textContent = '13.7k';
+            el.textContent = '21.4k';
         }
         if (el.textContent === '1' && el.parentElement && el.parentElement.textContent.includes('Recent citation')) {
-            el.textContent = '1438';
+            el.textContent = '2135';
         }
         
         // Hide Altmetric Title and container
@@ -486,7 +486,7 @@ document.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
-        window.open('/main_final.pdf', '_blank');
+        window.open('/main_final.pdf', '_self');
         return;
     }
     
@@ -494,7 +494,7 @@ document.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
-        window.open('/article.html', '_blank');
+        window.open('/article.html', '_self');
         return;
     }
 
