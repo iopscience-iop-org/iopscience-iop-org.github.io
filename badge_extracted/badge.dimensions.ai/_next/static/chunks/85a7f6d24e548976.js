@@ -150,7 +150,7 @@
         ("function" == typeof n.default || "object" == typeof n.default && null !== n.default) && void 0 === n.default.__esModule && (Object.defineProperty(n.default, "__esModule", {
             value: !0
         }), Object.assign(n.default, n), t.exports = n.default)
-    }, 97238, (e, t, n) => {
+    }, 4567838, (e, t, n) => {
         "use strict";
         Object.defineProperty(n, "__esModule", {
             value: !0
@@ -23220,7 +23220,7 @@ globalThis._sentryRouteManifest = '{"dynamicRoutes":[{"path":"/details/:idType/:
         c = s._(e.r(71645)),
         d = e.r(35326),
         f = e.r(42732),
-        p = e.r(97238),
+        p = e.r(4567838),
         h = e.r(51323),
         m = e.r(32120),
         g = e.r(92245),
@@ -23357,7 +23357,7 @@ globalThis._sentryRouteManifest = '{"dynamicRoutes":[{"path":"/details/:idType/:
         value: !0
     });
     let r = e.r(96517);
-    e.r(97238), window.next.turbopack = !0, self.__webpack_hash__ = "";
+    e.r(4567838), window.next.turbopack = !0, self.__webpack_hash__ = "";
     let a = e.r(5526);
     (0, r.appBootstrap)(t => {
         let {
