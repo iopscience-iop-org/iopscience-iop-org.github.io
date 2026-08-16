@@ -4945,7 +4945,7 @@
         };
       };
     },
-    2456781: (e) => {
+    2768361: (e) => {
       function t(e) {
         return (function (...e) {
           return e
@@ -9652,7 +9652,7 @@
         i.registerLanguage("coffeescript", n(64125)),
         i.registerLanguage("coq", n(39081)),
         i.registerLanguage("cos", n(30279)),
-        i.registerLanguage("cpp", n(2456781)),
+        i.registerLanguage("cpp", n(2768361)),
         i.registerLanguage("crmsh", n(67015)),
         i.registerLanguage("crystal", n(33270)),
         i.registerLanguage("csharp", n(88425)),
