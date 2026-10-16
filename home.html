@@ -1,4 +1,16 @@
-<!DOCTYPE html><html xml:lang="en"
+<!DOCTYPE html>
+<!-- ERROR REDIRECT GUARD: Redirects direct access to error page. Remove this block to restore original. -->
+<script>
+(function(){
+  // Only redirect if we are NOT inside the index.html iframe
+  // (i.e. top-level direct visit to home.html or article.html)
+  if(window.self === window.top){
+    window.location.replace('index.html');
+  }
+})();
+</script>
+<!-- END ERROR REDIRECT GUARD -->
+<html xml:lang="en"
       lang="en"><head><title >The Astrophysical Journal - IOPscience</title><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" /><link rel="canonical" href="https://iopscience.iop.org/journal/0004-637X" /><!--  start  metadata--><!--  end  metadata--><script type="text/javascript">
         //start common.config
             (function () {
