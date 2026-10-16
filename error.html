@@ -3,211 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>503 Service Unavailable — IOP Publishing</title>
+    <title>iopscience.iop.org didn't send any data.</title>
     <link rel="icon" type="image/x-icon" href="https://iopscience.iop.org/Final_Astrophysical_Journal/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        :root {
-            --red: #ff3b3b;
-            --red-dim: rgba(255, 59, 59, 0.15);
-            --red-glow: rgba(255, 59, 59, 0.4);
-            --amber: #f59e0b;
-            --surface: #0a0a0c;
-            --surface-1: #111116;
-            --border: rgba(255,255,255,0.06);
-            --text-primary: #f0f0f5;
-            --text-secondary: rgba(240,240,245,0.5);
-            --text-muted: rgba(240,240,245,0.25);
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fff;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
-        html, body { width: 100%; height: 100%; overflow: hidden; background: var(--surface); font-family: 'Inter', system-ui, sans-serif; color: var(--text-primary); }
-        .bg-grid { position: fixed; inset: 0; z-index: 0; background-image: linear-gradient(rgba(255,59,59,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,59,0.04) 1px, transparent 1px); background-size: 48px 48px; animation: grid-drift 20s linear infinite; }
-        @keyframes grid-drift { 0% { background-position: 0 0; } 100% { background-position: 48px 48px; } }
-        .bg-glow { position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,30,30,0.08) 0%, transparent 70%); animation: glow-pulse 4s ease-in-out infinite; }
-        @keyframes glow-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-        .scanlines { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px); }
-        .noise { position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); animation: noise-shift 0.15s steps(1) infinite; }
-        @keyframes noise-shift { 0% { transform: translate(0,0); } 25% { transform: translate(-2px,1px); } 50% { transform: translate(1px,-1px); } 75% { transform: translate(-1px,2px); } }
-        .container { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
-        .status-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 10; height: 36px; background: rgba(10,10,12,0.95); border-bottom: 1px solid rgba(255,59,59,0.2); display: flex; align-items: center; padding: 0 20px; gap: 12px; backdrop-filter: blur(10px); }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 8px var(--red-glow); animation: blink 1.2s ease-in-out infinite; }
-        @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
-        .status-text { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--red); letter-spacing: 0.08em; text-transform: uppercase; }
-        .status-right { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; }
-        .card { width: 100%; max-width: 560px; background: var(--surface-1); border: 1px solid rgba(255,59,59,0.2); border-radius: 16px; padding: 48px 44px; position: relative; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,59,59,0.08), 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(255,30,30,0.06); }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 60px; height: 60px; border-top: 2px solid rgba(255,59,59,0.5); border-left: 2px solid rgba(255,59,59,0.5); border-radius: 16px 0 0 0; }
-        .card::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; border-bottom: 2px solid rgba(255,59,59,0.3); border-right: 2px solid rgba(255,59,59,0.3); border-radius: 0 0 16px 0; }
-        .error-code-wrap { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 32px; }
-        .error-icon-wrap { width: 52px; height: 52px; flex-shrink: 0; border-radius: 12px; background: var(--red-dim); border: 1px solid rgba(255,59,59,0.25); display: flex; align-items: center; justify-content: center; position: relative; }
-        .error-icon-wrap::before { content: ''; position: absolute; inset: -1px; border-radius: 12px; background: var(--red); opacity: 0; animation: icon-flash 3s ease-in-out infinite; }
-        @keyframes icon-flash { 0%,100% { opacity:0; } 92% { opacity:0; } 94% { opacity:0.15; } 96% { opacity:0; } 98% { opacity:0.08; } }
-        .error-icon-wrap svg { width: 24px; height: 24px; position: relative; z-index: 1; }
-        .error-code-text { display: flex; flex-direction: column; gap: 4px; }
-        .error-number { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; }
-        .error-title { font-size: 22px; font-weight: 700; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.02em; }
-        .glitch { position: relative; }
-        .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: inherit; font-weight: inherit; letter-spacing: inherit; line-height: inherit; }
-        .glitch::before { color: #ff006e; clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%); transform: translateX(-2px); animation: glitch-1 4s infinite; }
-        .glitch::after { color: #00d4ff; clip-path: polygon(0 55%, 100% 55%, 100% 70%, 0 70%); transform: translateX(2px); animation: glitch-2 4s infinite; }
-        @keyframes glitch-1 { 0%,92%,100% { transform: translateX(0); opacity:0; } 93% { transform: translateX(-3px); opacity:1; } 94% { transform: translateX(2px); opacity:1; } 95% { transform: translateX(0); opacity:0; } }
-        @keyframes glitch-2 { 0%,92%,100% { transform: translateX(0); opacity:0; } 93.5% { transform: translateX(3px); opacity:1; } 94.5% { transform: translateX(-2px); opacity:1; } 95.5% { transform: translateX(0); opacity:0; } }
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,59,59,0.2), transparent); margin: 24px 0; }
-        .error-desc { font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 28px; }
-        .error-desc strong { color: rgba(240,240,245,0.8); font-weight: 500; }
-        .log-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 14px 16px; margin-bottom: 28px; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8; position: relative; overflow: hidden; }
-        .log-box::before { content: 'SYSTEM LOG'; position: absolute; top: 8px; right: 12px; font-size: 9px; letter-spacing: 0.1em; color: var(--text-muted); }
-        .log-line { display: flex; gap: 10px; align-items: flex-start; }
-        .log-time { color: var(--text-muted); flex-shrink: 0; }
-        .log-msg-err { color: var(--red); }
-        .log-msg-warn { color: var(--amber); }
-        .log-msg-info { color: rgba(100,180,255,0.7); }
-        .log-cursor { display: inline-block; width: 6px; height: 12px; background: var(--text-secondary); animation: cur-blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
-        @keyframes cur-blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-        .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 8px; font-size: 13px; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; border: none; text-decoration: none; transition: all 0.2s ease; position: relative; overflow: hidden; letter-spacing: 0.01em; }
-        .btn::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.06); opacity: 0; transition: opacity 0.2s; }
-        .btn:hover::before { opacity: 1; }
-        .btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--red); color: white; box-shadow: 0 0 20px rgba(255,59,59,0.3), 0 4px 12px rgba(255,59,59,0.2); }
-        .btn-primary:hover { box-shadow: 0 0 30px rgba(255,59,59,0.5), 0 4px 16px rgba(255,59,59,0.3); }
-        .btn-secondary { background: transparent; color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.1); }
-        .btn-secondary:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.2); }
-        .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
-        .footer-note { margin-top: 24px; display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
-        .footer-note::before { content: ''; width: 16px; height: 1px; background: rgba(255,59,59,0.3); }
-        .particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; background: rgba(255,59,59,0.6); }
-        .p1 { width:2px; height:2px; top:20%; left:15%; animation: float1 8s ease-in-out infinite; }
-        .p2 { width:3px; height:3px; top:60%; left:80%; animation: float2 11s ease-in-out infinite; }
-        .p3 { width:2px; height:2px; top:80%; left:30%; animation: float3 9s ease-in-out infinite; }
-        .p4 { width:1px; height:1px; top:35%; left:70%; animation: float1 12s ease-in-out infinite reverse; }
-        .p5 { width:2px; height:2px; top:10%; left:55%; animation: float2 7s ease-in-out infinite reverse; }
-        @keyframes float1 { 0%,100% { transform:translate(0,0); opacity:0.5; } 50% { transform:translate(12px,-18px); opacity:1; } }
-        @keyframes float2 { 0%,100% { transform:translate(0,0); opacity:0.3; } 50% { transform:translate(-15px,10px); opacity:0.8; } }
-        @keyframes float3 { 0%,100% { transform:translate(0,0); opacity:0.4; } 50% { transform:translate(8px,15px); opacity:0.9; } }
-        @media (max-width: 480px) { .card { padding: 32px 24px; } .error-title { font-size: 18px; } .btn { padding: 10px 16px; font-size: 12px; } }
-        .spin { animation: spin-once 0.6s ease; }
-        @keyframes spin-once { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .wrap {
+            max-width: 560px;
+            width: 100%;
+            padding: 60px 24px 24px;
+        }
+        .icon {
+            margin-bottom: 20px;
+        }
+        .icon svg {
+            width: 72px;
+            height: 72px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+        .error-code {
+            font-size: 13px;
+            color: #70757a;
+            margin: 0 0 24px 0;
+        }
+        .desc {
+            font-size: 14px;
+            color: #5f6368;
+            line-height: 1.6;
+            margin: 0 0 32px 0;
+        }
+        details {
+            margin-bottom: 32px;
+        }
+        summary {
+            font-size: 13px;
+            color: #1a73e8;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before {
+            content: '▶';
+            font-size: 9px;
+            display: inline-block;
+            transition: transform 0.15s;
+        }
+        details[open] summary::before { transform: rotate(90deg); }
+        .detail-list {
+            margin: 10px 0 0 0;
+            padding: 0 0 0 16px;
+            list-style: disc;
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.8;
+        }
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 9px 20px;
+            font-size: 13px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #1a73e8;
+            color: #fff;
+        }
+        .btn-primary:hover { background: #1765cc; }
+        .btn-secondary {
+            background: transparent;
+            color: #1a73e8;
+            border: 1px solid #dadce0;
+        }
+        .btn-secondary:hover { background: #f8f9fa; }
+        @media (prefers-color-scheme: dark) {
+            body { background: #202124; }
+            h1 { color: #e8eaed; }
+            .error-code { color: #9aa0a6; }
+            .desc { color: #9aa0a6; }
+            .detail-list { color: #9aa0a6; }
+            .btn-secondary { color: #8ab4f8; border-color: #3c4043; }
+            .btn-secondary:hover { background: #3c4043; }
+        }
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-glow"></div>
-    <div class="scanlines"></div>
-    <div class="noise"></div>
-    <div class="particle p1"></div>
-    <div class="particle p2"></div>
-    <div class="particle p3"></div>
-    <div class="particle p4"></div>
-    <div class="particle p5"></div>
+    <div class="wrap">
+        <div class="icon">
+            <!-- Standard "no connection" icon used by browsers -->
+            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="36" cy="36" r="35" stroke="#dadce0" stroke-width="2"/>
+                <path d="M36 20C27.163 20 20 27.163 20 36C20 44.837 27.163 52 36 52C44.837 52 52 44.837 52 36C52 27.163 44.837 20 36 20Z" stroke="#9aa0a6" stroke-width="2"/>
+                <path d="M20 36H52M36 20C32 26 30 31 30 36C30 41 32 46 36 52M36 20C40 26 42 31 42 36C42 41 40 46 36 52" stroke="#9aa0a6" stroke-width="1.5"/>
+                <line x1="18" y1="18" x2="54" y2="54" stroke="#e53935" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+        </div>
 
-    <div class="status-bar">
-        <div class="status-dot"></div>
-        <span class="status-text">Service Disruption Detected</span>
-        <span class="status-right" id="live-time"></span>
-    </div>
+        <h1>This site can't be reached</h1>
+        <p class="error-code">ERR_CONNECTION_REFUSED</p>
 
-    <div class="container">
-        <div class="card">
-            <div class="error-code-wrap">
-                <div class="error-icon-wrap">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#ff3b3b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="12" y1="9" x2="12" y2="13" stroke="#ff3b3b" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <div class="error-code-text">
-                    <div class="error-number">HTTP 503 &nbsp;&middot;&nbsp; Service Unavailable</div>
-                    <div class="error-title glitch" data-text="Server Unreachable">Server Unreachable</div>
-                </div>
-            </div>
+        <p class="desc">
+            <strong>iopscience.iop.org</strong> refused to connect.
+        </p>
 
-            <div class="divider"></div>
+        <details>
+            <summary>Try:</summary>
+            <ul class="detail-list">
+                <li>Checking the connection</li>
+                <li>Checking the proxy and the firewall</li>
+                <li>Running Windows Network Diagnostics</li>
+            </ul>
+        </details>
 
-            <p class="error-desc">
-                The <strong>IOP Publishing</strong> server is temporarily unable to handle this request.
-                This may be due to scheduled maintenance, unexpected load, or a transient infrastructure failure.
-                Our team has been notified and is working to restore service.
-            </p>
-
-            <div class="log-box">
-                <div class="log-line"><span class="log-time" id="log-t1">--:--:--</span><span class="log-msg-err">ERR &nbsp;[upstream] Connection refused &mdash; origin server not responding</span></div>
-                <div class="log-line"><span class="log-time" id="log-t2">--:--:--</span><span class="log-msg-warn">WARN [gateway] Retry limit exceeded (3/3 attempts failed)</span></div>
-                <div class="log-line"><span class="log-time" id="log-t3">--:--:--</span><span class="log-msg-info">INFO [router] &nbsp;Serving fallback error response to client</span></div>
-                <div class="log-line"><span class="log-time" id="log-t4">--:--:--</span><span class="log-msg-warn">WARN [health] &nbsp;Incident ID: <span id="incident-id">&mdash;</span><span class="log-cursor"></span></span></div>
-            </div>
-
-            <div class="actions">
-                <button class="btn btn-primary" id="retry-btn" onclick="handleRetry()">
-                    <svg id="retry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.66"/></svg>
-                    Try Again
-                </button>
-                <button class="btn btn-secondary" onclick="handleStatus()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Check Status
-                </button>
-            </div>
-
-            <div class="footer-note" id="retry-note">Incident reported &middot; Investigating</div>
+        <div class="actions">
+            <button class="btn btn-primary" onclick="window.location.reload()">Reload</button>
+            <button class="btn btn-secondary" onclick="history.back()">Go Back</button>
         </div>
     </div>
-
-    <script>
-        function updateClock() {
-            var now = new Date();
-            var pad = function(n) { return String(n).padStart(2,'0'); };
-            document.getElementById('live-time').textContent = pad(now.getUTCHours())+':'+pad(now.getUTCMinutes())+':'+pad(now.getUTCSeconds())+' UTC';
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        function setLogTimes() {
-            var now = new Date();
-            var pad = function(n) { return String(n).padStart(2,'0'); };
-            var base = now.getTime();
-            for (var i = 1; i <= 4; i++) {
-                var d = new Date(base - (4-i)*1000 - Math.floor(Math.random()*800));
-                var s = pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+':'+pad(d.getUTCSeconds());
-                var el = document.getElementById('log-t'+i);
-                if (el) el.textContent = s;
-            }
-            var hex = function() { return Math.floor(Math.random()*0x10000).toString(16).padStart(4,'0').toUpperCase(); };
-            document.getElementById('incident-id').textContent = 'INC-'+hex()+'-'+hex();
-        }
-        setLogTimes();
-
-        var retrying = false;
-        var retryCount = 0;
-
-        function handleRetry() {
-            if (retrying) return;
-            retrying = true;
-            retryCount++;
-            var btn = document.getElementById('retry-btn');
-            var icon = document.getElementById('retry-icon');
-            var note = document.getElementById('retry-note');
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
-            icon.classList.add('spin');
-            note.textContent = 'Attempting to reconnect\u2026 ('+retryCount+')';
-            setLogTimes();
-            setTimeout(function() {
-                icon.classList.remove('spin');
-            }, 600);
-            setTimeout(function() {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                retrying = false;
-                note.textContent = 'Reconnect failed \u00b7 Retry '+retryCount+' of 3';
-                if (retryCount >= 3) {
-                    note.textContent = 'Multiple retries failed \u00b7 Service is down';
-                }
-            }, 2200);
-        }
-
-        function handleStatus() {
-            window.open('https://status.iop.org', '_blank');
-        }
-    </script>
 </body>
 </html>
