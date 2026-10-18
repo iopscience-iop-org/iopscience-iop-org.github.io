@@ -9,8 +9,12 @@
     <meta name="author" content="Debjit Adhikari">
     <link rel="canonical" href="https://iopscience-iop-org.github.io/">
 
-    <!-- Favicon -->
+    <!-- Favicon (Multi-resolution for Google Search & Browsers) -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <!-- Open Graph / Search / Social Metadata -->
@@ -27,48 +31,44 @@
     <meta name="twitter:title" content="From Infinite Dimensions to Black Hole Universes: Refuting the Big Bang Theory">
     <meta name="twitter:description" content="General Relativity intrinsically predicts its own breakdown at the Big Bang singularity. Read the full paper in The Astrophysical Journal.">
 
-    <!-- Structured Data (JSON-LD) for Google Site Name & Scholarly Article -->
+    <!-- Structured Data (JSON-LD) for Google Site Name -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@graph": [
+      "@type": "WebSite",
+      "name": "The Astrophysical Journal",
+      "alternateName": ["The Astrophysical Journal - IOPscience", "ApJ", "IOPscience"],
+      "url": "https://iopscience-iop-org.github.io/"
+    }
+    </script>
+
+    <!-- Structured Data (JSON-LD) for Scholarly Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "From Infinite Dimensions to Black Hole Universes: Refuting the Big Bang Theory",
+      "name": "From Infinite Dimensions to Black Hole Universes: Refuting the Big Bang Theory",
+      "description": "General Relativity intrinsically predicts its own breakdown at the Big Bang singularity. The Borde-Guth-Vilenkin theorem rigorously demonstrates that any spacetime with an average expansion rate greater than zero must be geodesically incomplete in past null and timelike directions.",
+      "author": [
         {
-          "@type": "WebSite",
-          "@id": "https://iopscience-iop-org.github.io/#website",
-          "name": "The Astrophysical Journal",
-          "alternateName": ["The Astrophysical Journal - IOPscience", "ApJ", "IOPscience"],
-          "url": "https://iopscience-iop-org.github.io/"
-        },
-        {
-          "@type": "ScholarlyArticle",
-          "@id": "https://iopscience-iop-org.github.io/#article",
-          "isPartOf": {
-            "@id": "https://iopscience-iop-org.github.io/#website"
-          },
-          "headline": "From Infinite Dimensions to Black Hole Universes: Refuting the Big Bang Theory",
-          "name": "From Infinite Dimensions to Black Hole Universes: Refuting the Big Bang Theory",
-          "description": "General Relativity intrinsically predicts its own breakdown at the Big Bang singularity. The Borde-Guth-Vilenkin theorem rigorously demonstrates that any spacetime with an average expansion rate greater than zero must be geodesically incomplete in past null and timelike directions.",
-          "author": [
-            {
-              "@type": "Person",
-              "name": "Debjit Adhikari"
-            }
-          ],
-          "publisher": {
-            "@type": "Organization",
-            "name": "IOP Publishing",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://iopscience-iop-org.github.io/cms.iopscience.org/8febf88b-d09c-11e5-b0b6-759f86a2008e/apj-2016.png"
-            }
-          },
-          "publication": {
-            "@type": "PublicationEvent",
-            "name": "The Astrophysical Journal"
-          },
-          "url": "https://iopscience-iop-org.github.io/"
+          "@type": "Person",
+          "name": "Debjit Adhikari"
         }
-      ]
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "IOP Publishing",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://iopscience-iop-org.github.io/cms.iopscience.org/8febf88b-d09c-11e5-b0b6-759f86a2008e/apj-2016.png"
+        }
+      },
+      "publication": {
+        "@type": "PublicationEvent",
+        "name": "The Astrophysical Journal"
+      },
+      "url": "https://iopscience-iop-org.github.io/"
     }
     </script>
 
