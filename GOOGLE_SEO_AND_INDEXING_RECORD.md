@@ -185,3 +185,19 @@ File: `Final_Astrophysical_Journal/index.html`
 - Updated canonical URL, Open Graph URLs, and JSON-LD structured data in `index.html` and `FULLSCREEN_SYSTEM_BACKUP.html`.
 - Updated `sitemap.xml` and `robots.txt` to point to `https://iopscienceiop.org/`.
 
+---
+
+## 8. Transition to Native Full Page (Removal of 2nd Bar & Fullscreen)
+
+**Date Completed:** October 19, 2026  
+**Goal:** Completely remove the simulated address bar (`#custom-url-bar`), fullscreen splash trigger, and iframe container (`#stealthFrame`) now that the custom domain `iopscienceiop.org` is live with official SSL.
+
+### Architecture Update:
+1. `index.html` is now the **100% native article page** with direct DOM elements (equations, tables, badges, citations, author list).
+2. All Google SEO tags, `<title>`, `<meta name="description">`, Schema.org `WebSite` ("The Astrophysical Journal"), and `ScholarlyArticle` JSON-LD are directly in `<head>`.
+3. Visitors see a clean, authentic journal experience with zero iframe nesting and zero fake browser bars.
+4. Backups are preserved at:
+   - `FULLSCREEN_SYSTEM_BACKUP.html`
+   - `index.html.bar_backup`
+
+
