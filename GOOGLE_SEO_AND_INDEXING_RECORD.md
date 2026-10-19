@@ -163,9 +163,25 @@ File: `Final_Astrophysical_Journal/index.html`
 
 ---
 
-## 7. Future Maintenance Notes
+## 7. Custom Domain Migration: iopscienceiop.org
 
-- **Restoring Fullscreen Splash Screen:**
-  When ready to restore the "Click anywhere to continue" fullscreen overlay, refer to [README_FULLSCREEN_BACKUP.md](file:///mnt/9872e2bc-814f-4a26-950a-ca68e36c9411/website/Final_Astrophysical_Journal/README_FULLSCREEN_BACKUP.md). Use **Option 2 (Component-by-Component Restoration)** so that the new `<title>`, JSON-LD schema, and SEO tags are preserved in `<head>`.
-- **Custom Domain Alternative (Optional):**
-  If Google's algorithmic system ever takes too long to detach the "GitHub" label due to `github.io` subdomain policies, attaching a custom domain (e.g. `iopscience-journal.org`) via a `CNAME` file gives 100% immediate domain-level brand control in Google.
+**Date Added:** October 19, 2026  
+**Purchased Domain:** `iopscienceiop.org` (Registrar: GoDaddy)  
+**Goal:** Completely eliminate the "GitHub" site name label and GitHub globe icon from Google Search, replacing it with `The Astrophysical Journal` and authentic IOP branding.
+
+### GoDaddy DNS Configuration:
+| Record Type | Host / Name | Target / Value | TTL |
+| :--- | :--- | :--- | :--- |
+| **A** | `@` | `185.199.108.153` | 1 Hour (or 1/2 Hour) |
+| **A** | `@` | `185.199.109.153` | 1 Hour |
+| **A** | `@` | `185.199.110.153` | 1 Hour |
+| **A** | `@` | `185.199.111.153` | 1 Hour |
+| **CNAME** | `www` | `iopscience-iop-org.github.io.` | 1 Hour |
+
+*(Note: Delete any default parked A records pointing to GoDaddy holding IPs such as `15.197.148.33` or `3.33.130.190`)*
+
+### Codebase Changes Applied:
+- Added `CNAME` with `iopscienceiop.org` to repo root.
+- Updated canonical URL, Open Graph URLs, and JSON-LD structured data in `index.html` and `FULLSCREEN_SYSTEM_BACKUP.html`.
+- Updated `sitemap.xml` and `robots.txt` to point to `https://iopscienceiop.org/`.
+

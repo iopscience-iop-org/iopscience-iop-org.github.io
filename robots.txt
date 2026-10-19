@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iopscience-iop-org.github.io/sitemap.xml
+Sitemap: https://iopscienceiop.org/sitemap.xml
